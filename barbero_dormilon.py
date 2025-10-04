@@ -52,14 +52,14 @@ if __name__ == "__main__":
 
     barberos = []
     for i in range(n_barberos):
-        b = Process(target=atender, args=(i+1, barberos_sem, clientes_sem, mutex, atendidos, total_clientes))
+        b = Process(target=atender, args=(i+1, clientes_sem, mutex, atendidos, total_clientes))
         b.daemon = True
         b.start()
         barberos.append(b)
 
     clientes = []
     for i in range(n_clientes):
-        c = Process(target=ser_atendido, args=(i+1, barberos_sem, clientes_sem, sillas_sem, mutex, atendidos, rechazados))
+        c = Process(target=ser_atendido, args=(i+1, barberos_sem, clientes_sem, sillas_sem, mutex, rechazados))
         clientes.append(c)
         c.start()
 
